@@ -57,8 +57,8 @@ public class GarbageClear extends Activity {
                 case FOUND_FINISH:
                     //查找完毕
                     Found = true;
-                    StartFound.setText("开始清理");
-                    file_path.setText("查找完毕");
+                    StartFound.setText("Begining clean up");
+                    file_path.setText("Finished");
                     StartFound.setClickable(true);
                     progressdisplay.setProgress(100);
                     progressbar_num = 0;
@@ -68,8 +68,8 @@ public class GarbageClear extends Activity {
                     //清理完毕
                     Found = false;
                     StartClear.setClickable(true);
-                    StartFound.setText("开始扫描");
-                    StartClear.setText("清理完毕");
+                    StartFound.setText("Starting scan");
+                    StartClear.setText("Clean up");
                     grbage_size.setText("0");
                     StartFound.setClickable(true);
                     animation = null;
@@ -127,7 +127,7 @@ public class GarbageClear extends Activity {
                 // TODO Auto-generated method stub
                 StartFound.setClickable(false);
                 if (!Found) {
-                    StartFound.setText("扫描中");
+                    StartFound.setText("In the scan");
                     StartClear.setClickable(false);
                     new FoundTask(Environment.getExternalStorageDirectory()
                             + "/", ClearType).execute();
@@ -150,7 +150,7 @@ public class GarbageClear extends Activity {
                         }).start();
                     } else {
                         StartFound.setClickable(true);
-                        Toast.makeText(GarbageClear.this, "当前不需要清理", Toast.LENGTH_SHORT)
+                        Toast.makeText(GarbageClear.this, "There is no need to clean up", Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }
