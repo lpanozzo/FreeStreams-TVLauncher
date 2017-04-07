@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     break;
                 case 1://异常处理
                     initFragment("");
-                    showShortToast("图片加载失败！");
+                    showShortToast("Image loading failed!");
                     break;
                 case 2://图片数据解析
                     Bundle b = msg.getData();
@@ -406,7 +406,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 //连接网络更新数据
                 installApk();
             } else {
-                showShortToast("网络未连接");
+                showShortToast("The network is not connected");
                 ClientApplication.netFlag = false;
             }
         }
