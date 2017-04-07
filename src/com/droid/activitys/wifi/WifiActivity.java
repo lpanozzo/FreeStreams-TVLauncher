@@ -66,9 +66,9 @@ public class WifiActivity extends Activity implements OnClickListener,OnItemClic
 			 case WIFI_STATE_INIT:  
 			    	int wifiState=wiFiAdmin.GetWifiState();
 			    	if(wifiState==wiFiAdmin.getWifiManager().WIFI_STATE_DISABLED){  //wifi不可用啊
-				    	Wifi_StateDisplay.setText("WiFi 网卡未打开");
+				    	Wifi_StateDisplay.setText("WiFi NIC is not open");
 			    	}else if(wifiState==wiFiAdmin.getWifiManager().WIFI_STATE_UNKNOWN){//wifi 状态未知
-			    		Wifi_StateDisplay.setText("WiFi 网卡状态未知");
+			    		Wifi_StateDisplay.setText("WiFi NIC status is unknown");
 			    	}else if(wifiState==wiFiAdmin.getWifiManager().WIFI_STATE_ENABLED){//OK 可用
 			        	WifiSwitch.setChecked(true);
 			        	wiFiAdmin.StartScan();
@@ -76,10 +76,10 @@ public class WifiActivity extends Activity implements OnClickListener,OnItemClic
 				        handler.sendEmptyMessageDelayed(WIFI_SCAN, 1000);
 
 			    		if(wiFiAdmin.isWifiEnable()){
-			               Toast.makeText(WifiActivity.this, "wifi已经打开", Toast.LENGTH_SHORT).show();  
+			               Toast.makeText(WifiActivity.this, "Wifi already open", Toast.LENGTH_SHORT).show();  
 
 			    		}else { 
-				             Toast.makeText(WifiActivity.this, "请 开启 wifi", Toast.LENGTH_SHORT).show();  
+				             Toast.makeText(WifiActivity.this, "Please open Wifi", Toast.LENGTH_SHORT).show();  
 			    		}		        	
 			    	}
 			    	
@@ -92,41 +92,41 @@ public class WifiActivity extends Activity implements OnClickListener,OnItemClic
 			case  WIFI_SCAN:
 				wiFiAdmin.StartScan();
 				scanResults=wiFiAdmin.GetWifilist();
-				Wifi_StateDisplay.setText("正在扫描附近的WIFI...");
+				Wifi_StateDisplay.setText("Scanning nearby Wifi...");
 				if(scanResults==null){
 					handler.sendEmptyMessageDelayed(WIFI_SCAN, 1000);
 				}else if(scanResults.size()==0){
 					handler.sendEmptyMessageDelayed(WIFI_SCAN, 1000);
 					SetScanResult();
 				}else{
-					Wifi_StateDisplay.setText("附近WiFi");
+					Wifi_StateDisplay.setText("Near Wifi");
 					adapter=new WAndB_WifilistAdapter(WifiActivity.this, scanResults);
 					WifiListView.setAdapter(adapter);
 				}
 				break;
 			case WIFI_CLOSE:
 				SetScanResult();
-				Wifi_StateDisplay.setText("WIFI已关闭");
+				Wifi_StateDisplay.setText("Wifi is off");
 				break;
 			case WIFI_INFO:
 				if(wiFiAdmin.GetSSID().endsWith("<unknown ssid>")||wiFiAdmin.GetSSID().endsWith("NULL")){
 					wiFiAdmin.getWifiConnectInfo();
-					Wifi_StateDisplay.setText("无WIFI连接");
+					Wifi_StateDisplay.setText("No Wifi connection");
 					handler.sendEmptyMessageDelayed(WIFI_INFO, 2500);
 				}else if(wiFiAdmin.GetSSID().equals("NULL")){
 					wiFiAdmin.getWifiConnectInfo();
-					Wifi_StateDisplay.setText("无连接,请选择合适的WiFi连接");
+					Wifi_StateDisplay.setText("No connection, please select the appropriate WiFi connection");
 		    		handler.sendEmptyMessageDelayed(WIFI_INFO, 2500);
 		    	}else{
 		    		wiFiAdmin.getWifiConnectInfo();
 		    		if(wiFiAdmin.GetIntIp().equals("")){
 		    			handler.sendEmptyMessageDelayed(WIFI_INFO, 2500);
 		    		}
-		    		Wifi_StateDisplay.setText("已连接到"+wiFiAdmin.GetSSID()+"若切换有线网络请连接网线");
+		    		Wifi_StateDisplay.setText("Connected to"+wiFiAdmin.GetSSID()+"If you want to switch to wired connection, please connect the network cable");
 		    		ConnectDialog.dismiss();
 		    		ConnectSSID=wiFiAdmin.GetSSID();
 		    		Toast.makeText(WifiActivity.this, ConnectSSID, Toast.LENGTH_SHORT).show();
-		    		Toast.makeText(WifiActivity.this, "连接成功", Toast.LENGTH_SHORT).show();
+		    		Toast.makeText(WifiActivity.this, "Connection succeeded", Toast.LENGTH_SHORT).show();
 		    	}
 				break;
 			}
@@ -180,11 +180,11 @@ public void InitData(){
 			wiFiAdmin.StartScan();
 			scanResults=wiFiAdmin.GetWifilist();
 			handler.sendEmptyMessageDelayed(WIFI_SCAN, 1000);
-			 Toast.makeText(WifiActivity.this, "打开 WiFi", Toast.LENGTH_SHORT).show();  
+			 Toast.makeText(WifiActivity.this, "Turn on Wifi", Toast.LENGTH_SHORT).show();  
 		}else{
 			wiFiAdmin.CloseWifi();
 			handler.sendEmptyMessage(WIFI_CLOSE);
-			Toast.makeText(WifiActivity.this, "关闭 WiFi", Toast.LENGTH_SHORT).show();  
+			Toast.makeText(WifiActivity.this, "Shut down Wifi", Toast.LENGTH_SHORT).show();  
 		}
 		}
 	});
@@ -204,7 +204,7 @@ public void onClick(View arg0) {
 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 	// TODO Auto-generated method stub
 	if(GetNowWifiSSID().equals("\""+scanResults.get(arg2).SSID+"\"")){
-		Toast.makeText(WifiActivity.this, "当前已连接此网络", Toast.LENGTH_SHORT).show();
+		Toast.makeText(WifiActivity.this, "The network is currently connected", Toast.LENGTH_SHORT).show();
 		}else{
 	final int Num=arg2;
 	LayoutInflater layoutInflater=LayoutInflater.from(WifiActivity.this);
@@ -240,16 +240,16 @@ public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			String WifiPassword=password.getText().toString();
 			NetId=wiFiAdmin.AddNetwork(wiFiAdmin.CreatConfiguration(scanResults.get(Num).SSID, WifiPassword, 3));
 			if(NetId==0){
-				Toast.makeText(WifiActivity.this, "无线网卡不可用", Toast.LENGTH_LONG).show();
+				Toast.makeText(WifiActivity.this, "Wireless card is not available", Toast.LENGTH_LONG).show();
 			}else if(NetId==1){
-				Toast.makeText(WifiActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+				Toast.makeText(WifiActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
 			}else if(NetId==2){
-				Toast.makeText(WifiActivity.this, "正在连接", Toast.LENGTH_LONG).show();  
+				Toast.makeText(WifiActivity.this, "connecting", Toast.LENGTH_LONG).show();  
                  ConnectDialog.dismiss();
 			}else if(NetId==-1){
-				Toast.makeText(WifiActivity.this, "连接失败", Toast.LENGTH_LONG).show(); 
+				Toast.makeText(WifiActivity.this, "Connection failed", Toast.LENGTH_LONG).show(); 
 			}else{
-				Toast.makeText(WifiActivity.this, "正在连接", Toast.LENGTH_LONG).show();  
+				Toast.makeText(WifiActivity.this, "Connecting", Toast.LENGTH_LONG).show();  
                 ConnectDialog.dismiss();
 			}
 			handler.sendEmptyMessageDelayed(WIFI_INFO, 2000);
