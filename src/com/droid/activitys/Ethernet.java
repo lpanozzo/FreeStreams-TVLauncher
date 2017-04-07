@@ -81,10 +81,10 @@ public class Ethernet extends Activity {
 
             if (currentNetworkInfo.isConnected()
                     && currentNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                tip.setText("已连接无线网络，若连接有线请插好网线");
+                tip.setText("Connected to the Wireless Network");
             } else if (currentNetworkInfo.isConnected()
                     && currentNetworkInfo.getType() == ConnectivityManager.TYPE_ETHERNET) {
-                tip.setText("已连接有线网络");
+                tip.setText("Connected to the Wired Network");
             }
         }
     };
