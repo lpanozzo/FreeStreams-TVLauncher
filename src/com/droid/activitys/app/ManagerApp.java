@@ -263,7 +263,7 @@ public class ManagerApp extends LinearLayout implements View.OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(mContext, "更新-更新", Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, "Update - Update", Toast.LENGTH_SHORT).show();
 				mPopupWindow.dismiss();
 			}
 		});
@@ -271,7 +271,7 @@ public class ManagerApp extends LinearLayout implements View.OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(mContext, "收藏-收藏", Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, "Collection - Collection", Toast.LENGTH_SHORT).show();
 				mPopupWindow.dismiss();
 			}
 		});
@@ -279,7 +279,7 @@ public class ManagerApp extends LinearLayout implements View.OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(mContext, "卸载--卸载", Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, "Uninstall - Uninstall", Toast.LENGTH_SHORT).show();
 				String packageName = mAppList.get(position).getPackageName();
 				Log.i(TAG, "packageName===" + packageName);
 				Uri packageURI = Uri.parse("package:" + packageName);
