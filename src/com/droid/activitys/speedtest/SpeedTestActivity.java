@@ -79,11 +79,11 @@ public class SpeedTestActivity extends Activity implements OnClickListener {
                 case SPEED_FINISH:
                     Speed.setText(AverageSpeed + "kb/s");
                     if (AverageSpeed <= 200) {
-                        Movie_TYPE.setText("普清电影");
+                        Movie_TYPE.setText("Puqing film");
                     } else if (AverageSpeed <= 400) {
-                        Movie_TYPE.setText("高清电影");
+                        Movie_TYPE.setText("HD movies");
                     } else if (AverageSpeed > 400) {
-                        Movie_TYPE.setText("超清电影");
+                        Movie_TYPE.setText("Super clear movie");
                     }
                     PROGRESSTHREADCANRUN = false;
                     THREADCANRUN = false;
