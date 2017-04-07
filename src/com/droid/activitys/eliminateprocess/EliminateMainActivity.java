@@ -71,12 +71,12 @@ public class EliminateMainActivity extends Activity {
 				clear_endlayout.setVisibility(View.VISIBLE);
 				increase_speed.setText(percentnum+"%");
 				release_memory.setText(Clearmemory+"MB");
-				Start_kill.setText("清理完成");
+				Start_kill.setText("Clean up");
 				break;
 			case NEEDENT_CLEAR:
 				percentnum=0+"";
 				Clearmemory=0+"";
-				Toast.makeText(EliminateMainActivity.this, "当前不需要清理", Toast.LENGTH_LONG).show();
+				Toast.makeText(EliminateMainActivity.this, "There is no need to clean up", Toast.LENGTH_LONG).show();
 				break;
 			case PERCENT_CHANGE:
 				Allpercent.setText(allpercent+"%");
