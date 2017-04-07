@@ -151,7 +151,7 @@ public class Bluetooth extends BaseActivity implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BluetoothDevice device = (BluetoothDevice) list.get(position).get("device");
                 device.createBond();
-                showShortToast("正在配对..");
+                showShortToast("Being paired...");
             }
         });
 
@@ -203,7 +203,7 @@ public class Bluetooth extends BaseActivity implements View.OnClickListener {
                             startActivity(intent);
                         }
                     } else {
-                        showShortToast("蓝牙不可用！");
+                        showShortToast("Bluetooth is not available!");
                     }
                     openIV.setBackgroundResource(R.drawable.switch_on);
                     searchIV.setVisibility(View.VISIBLE);
@@ -248,18 +248,18 @@ public class Bluetooth extends BaseActivity implements View.OnClickListener {
                     }
                 } else if (pairPosition == -2) {
                     try {
-                        showShortToast("正在取消配对..");
+                        showShortToast("Canceling pairing...");
                         boolean b = Tools.removeBond(pairDevice.getClass(), pairDevice);
                         if (b) {
                             Map<String, Object> map = new HashMap<String, Object>();
                             map.put("name", pairDevice.getName());
                             map.put("type", pairDevice.getBluetoothClass().getDeviceClass());
                             map.put("device", pairDevice);
-                            pairTVName.setText("未配对");
+                            pairTVName.setText("Unpaired");
                             list.add(map);
                             itemAdapter.notifyDataSetChanged();
                         } else {
-                            showShortToast("取消配对失败");
+                            showShortToast("Cancel pairing failed");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -292,7 +292,7 @@ public class Bluetooth extends BaseActivity implements View.OnClickListener {
                     }
                 }
             } else if (device != null && device.getBondState() == BluetoothDevice.BOND_BONDING) {
-                showShortToast("正在配对");
+                showShortToast("Being paired");
             } else if (device != null && device.getBondState() == BluetoothDevice.BOND_BONDED) {
                 pairTVName.setText(device.getName());
                 for (int i = 0; i < list.size(); i++) {
@@ -302,7 +302,7 @@ public class Bluetooth extends BaseActivity implements View.OnClickListener {
                         itemAdapter.notifyDataSetChanged();
                     }
                 }
-                showShortToast("配对完成");
+                showShortToast("Pairing is complete");
             }
         }
     };
